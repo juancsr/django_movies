@@ -13,26 +13,26 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Country',
+            name='Pais',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
+                ('nombre', models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
-            name='Movie',
+            name='Pelicula',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250)),
-                ('country', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.country')),
+                ('titulo', models.CharField(max_length=250)),
+                ('pais', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.pais')),
             ],
         ),
         migrations.CreateModel(
-            name='Score',
+            name='Calificacion',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('value', models.PositiveSmallIntegerField()),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.movie')),
+                ('valor', models.PositiveSmallIntegerField()),
+                ('pelicula', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.pelicula')),
             ],
         ),
     ]

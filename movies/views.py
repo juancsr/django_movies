@@ -24,13 +24,12 @@ class MovieView(APIView):
     """
     def get(self, request, *args, **kwargs):
         response = { 'success': True }
-        status = codes.HTTP_200_OK
         try:
-            data = Movie.objects.all()
-            serializer = MovieSerializer(data, many=True)
+            data = Pelicula.objects.all()
+            serializer = PeliculaSerializer(data, many=True)
             response['data'] = serializer.data
         except Exception as e:
             status = codes.HTTP_400_BAD_REQUEST
             response['success'] = False
             print(e)
-        return Response(body)
+        return Response(response)
