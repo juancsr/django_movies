@@ -42,10 +42,10 @@ class MovieView(APIView):
         response = { 'success': True }
         try:
             data = request.data
-            serializer = PeliculaSerializer(data=data)
-            if serializer.is_valid(raise_exception=True):
-                saved = serializer.save()
-                response['data'] = saved
+            new_movie = Pelicula.objects.create(titulo=data['titulo'], pais=Pais.objects.get(id=data['pais']))
+            new_movie.save()
+            serializer = PeliculaSerializer(new_movie)
+            response['data'] = serializer.data
         except Exception as e:
             response['success'] = False
             print(e)
