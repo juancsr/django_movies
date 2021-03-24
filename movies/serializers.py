@@ -1,9 +1,13 @@
 from rest_framework import serializers
 
-from movies.models import Pelicula, Pais
+from movies.models import Pelicula
 
 class PeliculaSerializer(serializers.ModelSerializer):
-    country_name = serializers.CharField(source='pais.nombre')
+
+    pais = serializers.CharField()
+    
     class Meta:
         model = Pelicula
-        fields = ('titulo', 'country_name')
+        fields = ('titulo', 'pais')
+
+
