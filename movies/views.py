@@ -51,3 +51,21 @@ class MovieView(APIView):
             print(e)
 
         return Response(response)
+    
+    def put(self, request, *args, **kwargs):
+        response = { 'success': True }
+        try:
+            id = kwargs['pk']
+            data = request.data
+            movie = Pelicula.objects.get(id=id)
+            movie.titulo = data['titulo']
+            if movie.pais.pk != data['pais']:
+                movie.pais = Pais.objects.get(pk=data['pais'])
+            movie.save()
+            serializer = PeliculaSerializer(movie)
+            response['data'] = serializer.data
+        except Exception as e:
+            response['success'] = False
+            print(e)
+        
+        return Response(response)
