@@ -83,13 +83,7 @@ WSGI_APPLICATION = 'django_movies.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-
+# DATABASE DEV
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -101,6 +95,21 @@ DATABASES = {
         'PASSWORD': 'movies',
         'HOST': 'localhost',
         'PORT': '5433',
+    }
+}
+
+#DATABASE PROD
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd3q2gdm5ku8h0j',
+        'OPTIONS': {
+            'options': '-c search_path=django,public'
+        },
+        'USER': 'fsarheujwkueqn',
+        'PASSWORD': '43ebbe6e2b4c7491136fdb6ea384ca0d3b9dd89390bd859bfe16b7323e8052e2',
+        'HOST': 'ec2-3-91-127-228.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
