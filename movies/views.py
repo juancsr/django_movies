@@ -22,6 +22,7 @@ class MovieView(APIView):
 
     Methods availables : GET, POST, PUT, DELETE
     """
+
     def get(self, request, *args, **kwargs):
         response = { 'success': True }
         try:
@@ -64,6 +65,17 @@ class MovieView(APIView):
             movie.save()
             serializer = PeliculaSerializer(movie)
             response['data'] = serializer.data
+        except Exception as e:
+            response['success'] = False
+            print(e)
+        
+        return Response(response)
+
+    def delete(self, request, *args, **kwargs):
+        response = { 'success': True }
+        try:
+            id = kwargs['pk']
+            Pelicula.objects.get(id=id).delete()
         except Exception as e:
             response['success'] = False
             print(e)
