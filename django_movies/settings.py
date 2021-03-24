@@ -25,7 +25,7 @@ SECRET_KEY = 'h$82rb)ud10i!yaphbm8vumxaib)9%$p3f5@%f@brc#0-oez$q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', 'juancsr-djangomovies.herokuapp.com']
 
 
 # Application definition
