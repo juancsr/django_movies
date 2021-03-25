@@ -2,6 +2,7 @@
 if [ -d "docker-compose" ]; then
     echo "docker-compose wasn't found"
 else
+    docker-compose rm
     echo "Creating .env file..."
     echo "PYTHON_PORT=8090
 POSTGRES_DB=movies
