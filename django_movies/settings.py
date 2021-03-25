@@ -25,7 +25,7 @@ SECRET_KEY = 'h$82rb)ud10i!yaphbm8vumxaib)9%$p3f5@%f@brc#0-oez$q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'juancsr-djangomovies.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'juancsr-djangomovies.herokuapp.com', '*']
 
 
 # Application definition
@@ -41,13 +41,9 @@ INSTALLED_APPS = [
     'movies'
 ]
 
-#REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-#    'DEFAULT_PERMISSION_CLASSES': [
-#        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-#    ]
-#}
+# REST_FRAMEWORK = {
+#     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

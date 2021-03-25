@@ -12,12 +12,13 @@ class Pais(models.Model):
 class Pelicula(models.Model):
     titulo = models.CharField(max_length=250)
     pais = models.ForeignKey(Pais, on_delete=models.CASCADE)
-
+    calificacion = models.PositiveSmallIntegerField(default=1,
+        validators=[MinValueValidator(1), MaxValueValidator(5)])
     def __str__(self):
         return self.titulo
 
 # Score: individual movie's score
-class Calificacion(models.Model):
+class Puntuacion(models.Model):
     valor = models.PositiveSmallIntegerField(default=1,
         validators=[MinValueValidator(1), MaxValueValidator(5)])
     pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)  
