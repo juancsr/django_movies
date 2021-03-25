@@ -12,7 +12,7 @@ from rest_framework.generics import GenericAPIView, CreateAPIView, RetrieveAPIVi
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.response import Response
 
-from movies.models import Pelicula
+from movies.models import Pelicula, Pais
 from movies.serializers import PeliculaSerializer
 
 class MovieView(APIView):
@@ -101,4 +101,34 @@ class SearchView(APIView):
             response['success'] = False
             print(e)
         
+        return Response(response)
+
+class SummaryView(APIView):
+
+    def get(self, request):
+        response = {'success': True}
+        CLAVE_TEMPLATE = 'count_calificacion_'
+        try:
+            response['data'] = []
+            paises = Pais.objects.all().values_list('nombre')
+            for pais in paises:
+                count_paises = Pelicula.objects.filter(pais__nombre=pais[0])
+                data = { 'pais': pais[0], 'count_pais': count_paises.count() }
+
+                for i in range(1,6):
+                    clave = CLAVE_TEMPLATE+str(i)
+                    data[clave] = 0
+                
+                for pelicula in count_paises.values_list('calificacion'):
+                    clave = CLAVE_TEMPLATE+str(pelicula[0])
+                    data[clave] = data[clave] + 1
+
+                response['data'].append(data)
+            
+        except KeyError as ke:
+            response['success'] = False
+            print(ke)
+        except Exception as e:
+            response['success'] = False
+            print(e)
         return Response(response)
