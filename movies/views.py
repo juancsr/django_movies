@@ -132,3 +132,18 @@ class SummaryView(APIView):
             response['success'] = False
             print(e)
         return Response(response)
+
+class TopView(APIView):
+
+    def get(self, request):
+        response = {'success': True}
+        try:
+            movies = Pelicula.objects.order_by('-calificacion')[:5]
+            serializer = PeliculaSerializer(movies, many=True)
+            response['data'] = serializer.data
+        except Exception as e:
+            response['success'] = False
+            print(e)
+        return Response(response)
+        
+
